@@ -5,11 +5,19 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { CityChooserComponent } from './city-chooser/city-chooser.component';
+import { InfobarComponent } from './infobar/infobar.component';
+import { ContentComponent } from './content/content.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent
+    NavigationComponent,
+    CityChooserComponent,
+    InfobarComponent,
+    ContentComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
