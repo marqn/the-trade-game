@@ -12,4 +12,8 @@ export class InfobarComponent implements OnInit {
   ngOnInit() {
   }
 
+  private map() {
+    console.log('route to map');
+  }
+
 }
