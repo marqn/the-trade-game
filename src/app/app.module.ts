@@ -5,18 +5,29 @@ import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { NavigationComponent } from './navigation/navigation.component';
-import { CityChooserComponent } from './city-chooser/city-chooser.component';
-import { InfobarComponent } from './infobar/infobar.component';
-import { ContentComponent } from './content/content.component';
-import { FooterComponent } from './footer/footer.component';
-import { StoreComponent } from './store/store.component';
-import { ProductsComponent } from './productsPage/products.component';
-import { ProductComponent } from './product/product.component';
+import { NavigationComponent } from './views/navigation/navigation.component';
+import { CityChooserComponent } from './views/city-chooser/city-chooser.component';
+import { InfobarComponent } from './views/infobar/infobar.component';
+import { ContentComponent } from './views/content/content.component';
+import { FooterComponent } from './views/footer/footer.component';
+import { StoreComponent } from './views/store/store.component';
+import { ProductsComponent } from './views/productsPage/products.component';
+import { ProductComponent } from './views/product/product.component';
+import { BuyComponent } from './views/buy/buy.component';
+import {game} from "./stores/gamestore";
+
+import {StoreModule} from "@ngrx/store";
+import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 
 const appRoutes:Routes = [
   {
     path: 'products', component:ProductsComponent
+  },
+  {
+    path:'buy', component:BuyComponent
+  },
+  {
+    path:'sell', component:BuyComponent
   },
   {
     path: 'store', component:StoreComponent
@@ -37,13 +48,18 @@ const appRoutes:Routes = [
     FooterComponent,
     StoreComponent,
     ProductsComponent,
-    ProductComponent
+    ProductComponent,
+    BuyComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    StoreModule.provideStore({game}),
+    StoreDevtoolsModule.instrumentOnlyWithExtension({
+      maxAge: 10
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

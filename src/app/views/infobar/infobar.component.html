@@ -1,0 +1,17 @@
+<div class="row text-center">
+  <div class="col-md-4">
+    <h3>Cash: {{ gamedata.cash | currency:'USD':1.2-2 }}</h3>
+    <h5>Debt: {{ gamedata.debt | currency:'USD':1.2-2 }}</h5>
+  </div>
+
+  <div class="col-md-4">
+    <h2>{{ gamedata.currentCity.name }}</h2>
+    <button class="btn btn-default" routerLink="/city-chooser">Change city</button>
+  </div>
+
+  <div class="col-md-4 ">
+    <h2>Day: {{ gamedata.currentDay }}</h2>
+    <h5>to end: {{ gamedata.dayLimit }}</h5>
+  </div>
+</div>
+<hr>

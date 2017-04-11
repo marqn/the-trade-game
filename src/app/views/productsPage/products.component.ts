@@ -7,11 +7,15 @@ import {Component, OnInit} from "@angular/core";
 })
 export class ProductsComponent implements OnInit {
 
-  constructor() {
-  }
+  products:Array<any> = [
+    'Tobacco',
+    'Coffee',
+    'Tea',
+    'Spices'
+  ];
 
-  ngOnInit() {
-  }
+  constructor() {}
+  ngOnInit() {}
 
   priceGenerator(min:number = 1, max:number = 100):number {
     return Math.random() * (max - min) + min ;
