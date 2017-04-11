@@ -8,7 +8,7 @@ import {Product, productFactory} from "../../models/product";
 })
 export class ProductsComponent implements OnInit {
 
-  products:Array<any> = [
+  products:Array<Product> = [
     productFactory(1, 'Tobacco', this.priceGenerator()),
     productFactory(2, 'Coffee', this.priceGenerator()),
     productFactory(3, 'Tea', this.priceGenerator()),
