@@ -1,4 +1,5 @@
 import {Component, OnInit} from "@angular/core";
+import {Product, productFactory} from "../../models/product";
 
 @Component({
   selector: 'app-products',
@@ -8,10 +9,10 @@ import {Component, OnInit} from "@angular/core";
 export class ProductsComponent implements OnInit {
 
   products:Array<any> = [
-    'Tobacco',
-    'Coffee',
-    'Tea',
-    'Spices'
+    productFactory(1, 'Tobacco', this.priceGenerator()),
+    productFactory(2, 'Coffee', this.priceGenerator()),
+    productFactory(3, 'Tea', this.priceGenerator()),
+    productFactory(4, 'Spices', this.priceGenerator())
   ];
 
   constructor() {}
