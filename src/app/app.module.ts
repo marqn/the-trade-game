@@ -15,9 +15,11 @@ import { ProductsComponent } from './views/productsPage/products.component';
 import { ProductComponent } from './views/product/product.component';
 import { BuyComponent } from './views/buy/buy.component';
 import {game} from "./stores/gamestore";
+import {cityStore} from "./stores/city.store";
 
 import {StoreModule} from "@ngrx/store";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
+import {CityService} from "./services/city.service";
 
 const appRoutes:Routes = [
   {
@@ -56,12 +58,12 @@ const appRoutes:Routes = [
     FormsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
-    StoreModule.provideStore({game}),
+    StoreModule.provideStore({ game, cityStore}),
     StoreDevtoolsModule.instrumentOnlyWithExtension({
       maxAge: 10
     })
   ],
-  providers: [],
+  providers: [CityService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

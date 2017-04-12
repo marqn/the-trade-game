@@ -1,6 +1,6 @@
 import {City} from "./city";
 import {Product} from "./product";
-export interface UserData {
+export class UserData {
 
 //account
   id:string;
@@ -13,6 +13,6 @@ export interface UserData {
   dayLimit:number;
   currentCity:City;
 
-  store:Array<Product>;
+  warehouse:Array<Product>;
 
 }

@@ -4,7 +4,7 @@ export interface Product {
   prize:number;
 }
 
-export function productFactory(id, name, prize) {
+export function productFactory(id:number, name:string, prize:number = 0) {
   return <Product> {
     id: id,
     name: name,

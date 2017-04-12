@@ -2,7 +2,7 @@
   <div class="col-md-4 col-md-offset-4">
     <div class="text-center">
       <h3>City list:</h3>
-      <button *ngFor="let city of cities" class="btn btn-success" type="button">
+      <button *ngFor="let city of cities" class="btn btn-success" type="button" (click)="changeCity(city)">
         {{city.name}}
       </button>
     </div>

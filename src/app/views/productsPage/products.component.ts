@@ -1,5 +1,8 @@
 import {Component, OnInit} from "@angular/core";
-import {Product, productFactory} from "../../models/product";
+import {Product} from "../../models/product";
+import {Store} from "@ngrx/store";
+import {UserData} from "../../models/userdata";
+import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'app-products',
@@ -8,18 +11,17 @@ import {Product, productFactory} from "../../models/product";
 })
 export class ProductsComponent implements OnInit {
 
-  products:Array<Product> = [
-    productFactory(1, 'Tobacco', this.priceGenerator()),
-    productFactory(2, 'Coffee', this.priceGenerator()),
-    productFactory(3, 'Tea', this.priceGenerator()),
-    productFactory(4, 'Spices', this.priceGenerator())
-  ];
+  products:Array<Product>;
+  productsStore:Observable<UserData>;
 
-  constructor() {}
-  ngOnInit() {}
+  constructor(private store:Store<UserData>) {
+    this.productsStore = store.select('game');
+    this.productsStore.subscribe(v => {
+      this.products = v.warehouse;
+    });
+  }
 
-  priceGenerator(min:number = 1, max:number = 100):number {
-    return Math.random() * (max - min) + min ;
+  ngOnInit() {
   }
 
 }
