@@ -18,28 +18,29 @@ export class CityChooserComponent implements OnInit {
 
   cityChooserStore:Observable<UserData>;
 
-
   constructor(private store:Store<UserData>, private router:Router, private cityService:CityService) {
     this.cityChooserStore = store.select('game');
-    /*
-     this.cityChooserStore.subscribe(v => {
-     console.log(v);
-     this.cities = v.cities;
-     });
-     */
+    this.cityChooserStore.subscribe(v => {
+
+      this.cities = new Array();
+      for(let city of this.cityService.getCities()){
+        if(city != v.currentCity) {
+          this.cities.push(city);
+        }
+      }
+    });
   }
 
-  ngOnInit() {
-    this.cities = this.cityService.getCities();
-  } 
+  ngOnInit() {}
 
   private changeCity(city:City):void {
+
+    this.router.navigate(['/products']);
+
     this.store.dispatch({
       type: CHANGE_CITY,
       payload: city
     });
-
-    this.router.navigate(['/products']);
   }
 
 }

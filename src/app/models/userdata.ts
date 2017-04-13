@@ -15,4 +15,6 @@ export class UserData {
 
   warehouse:Array<Product>;
 
+  isEndGame:boolean;
+
 }

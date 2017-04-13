@@ -1,7 +1,7 @@
 import {UserData} from "../models/userdata";
 import {productFactory, Product} from "../models/product";
-import {City} from "../models/city";
-import {BUY_PRODUCT, CHANGE_CITY} from "../actions/actions";
+import {BUY_PRODUCT, CHANGE_CITY, NEW_GAME} from "../actions/actions";
+import {CITIES} from "../mocks/mocks";
 
 export const game = (state:UserData = initGame(), action) => {
   switch (action.type) {
@@ -9,10 +9,19 @@ export const game = (state:UserData = initGame(), action) => {
     case CHANGE_CITY:
     {
       changePrizeForAllProducts(state.warehouse);
-      state.currentDay++;
-      state.dayLimit--;
+      watchGameProgress(state);
+      watchEndGame(state);
+
       state.currentCity = action.payload;
+
       return Object.assign({}, state, action.payload);
+    }
+
+    case NEW_GAME:
+    {
+      console.log('NEW_GAME');
+      state = initGame();
+      changePrizeForAllProducts(state.warehouse);
     }
 
     case BUY_PRODUCT:
@@ -25,6 +34,17 @@ export const game = (state:UserData = initGame(), action) => {
   }
 };
 
+function watchGameProgress(state:UserData):void {
+  state.currentDay++;
+  state.dayLimit--;
+}
+
+function watchEndGame(state:UserData):void {
+  if (state.dayLimit <= 0) {
+    state.isEndGame = true;
+  }
+}
+
 export function initGame():UserData {
 
   let userData:UserData = new UserData();
@@ -34,20 +54,21 @@ export function initGame():UserData {
     productFactory(3, 'Tea'),
     productFactory(4, 'Spices')
   ];
- 
+
   userData.cash = 2000;
   userData.debt = 2000;
   userData.currentDay = 1;
-  userData.dayLimit = 10;
+  userData.dayLimit = 3;
 
-  userData.currentCity = <City>{id: 1, name: 'London'};
+  userData.currentCity = CITIES[0];
   userData.warehouse = products;
+  userData.isEndGame = false;
 
   return userData;
 }
 
 function changePrizeForAllProducts(products:Array<Product>, min:number = 1, max:number = 100):void {
-  for (let item of products) { 
+  for (let item of products) {
     item.prize = Math.random() * (max - min) + min;
   }
 }
