@@ -1,0 +1,10 @@
+<div class="jumbotron">
+  <h3>{{ productItem.name }}</h3>
+  <p>{{ productItem.prize | currency:'USD':1.1-2 }}</p>
+  <p>
+    <a class="btn btn-success btn-lg" role="button" (click)="selectProduct(productItem, 'buy')">Buy</a>
+    <a class="btn btn-danger btn-lg" role="button" (click)="selectProduct(productItem, 'sell')" *ngIf="productItem.onStore!=0">Sell</a>
+  </p>
+  <p>In a warehouse:</p>
+  <p>{{ productItem.onStore }}</p>
+</div>

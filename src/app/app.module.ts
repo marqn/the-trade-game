@@ -11,7 +11,7 @@ import {ContentComponent} from "./views/content/content.component";
 import {FooterComponent} from "./views/footer/footer.component";
 import {StoreComponent} from "./views/store/store.component";
 import {ProductsComponent} from "./views/productsPage/products.component";
-import {ProductComponent} from "./views/product/product.component";
+import {ProductComponent} from "./views/productsPage/product/product.component";
 import {BuyComponent} from "./views/buy/buy.component";
 import {EndpageComponent} from "./views/endpage/endpage.component";
 import {game} from "./stores/gamestore";
@@ -19,6 +19,9 @@ import {StoreModule} from "@ngrx/store";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 import {CityService} from "./services/city.service";
 import { StartpageComponent } from './views/startpage/startpage.component';
+import {cityStore} from "./stores/city.store";
+import {selectedProduct} from "./stores/selectedProduct";
+import { SellProductsComponent } from './views/sell-products/sell-products.component';
 
 const appRoutes:Routes = [
   {
@@ -28,7 +31,7 @@ const appRoutes:Routes = [
     path: 'buy', component: BuyComponent
   },
   {
-    path: 'sell', component: BuyComponent
+    path: 'sell', component: SellProductsComponent
   },
   {
     path: 'store', component: StoreComponent
@@ -58,14 +61,15 @@ const appRoutes:Routes = [
     ProductComponent,
     BuyComponent,
     EndpageComponent,
-    StartpageComponent
+    StartpageComponent,
+    SellProductsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
-    StoreModule.provideStore({game}),
+    StoreModule.provideStore({ game, cityStore, selectedProduct}),
     StoreDevtoolsModule.instrumentOnlyWithExtension({
       maxAge: 10
     })

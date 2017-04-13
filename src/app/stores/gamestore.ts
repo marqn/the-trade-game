@@ -19,7 +19,6 @@ export const game = (state:UserData = initGame(), action) => {
 
     case NEW_GAME:
     {
-      console.log('NEW_GAME');
       state = initGame();
       changePrizeForAllProducts(state.warehouse);
     }

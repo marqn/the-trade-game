@@ -1,15 +1,15 @@
-import {Component, OnInit} from "@angular/core";
-import {Store} from "@ngrx/store";
-import {Observable} from "rxjs/Observable";
-import {Product} from "../../models/product";
+import { Component, OnInit } from '@angular/core';
 import {UserData} from "../../models/userdata";
+import {Product} from "../../models/product";
+import {Observable} from "rxjs/Observable";
+import {Store} from "@ngrx/store";
 
 @Component({
-  selector: 'app-buy',
-  templateUrl: './buy.component.html',
-  styleUrls: ['./buy.component.css']
+  selector: 'app-sell-products',
+  templateUrl: './sell-products.component.html',
+  styleUrls: ['./sell-products.component.css']
 })
-export class BuyComponent implements OnInit {
+export class SellProductsComponent {
 
   range:number = 0;
   rangeMax:number;
@@ -34,9 +34,6 @@ export class BuyComponent implements OnInit {
         this.rangeMax = Math.round(userData.cash / this.product.prize);
       }
     });
-  }
-
-  ngOnInit() {
   }
 
 }
