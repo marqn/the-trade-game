@@ -2,13 +2,13 @@
   <div class="col-sm-4 col-sm-offset-4">
     <h2>{{ product.name }}</h2>
     <h3>{{ product.prize | currency:'USD':1.1-2 }}</h3>
-    <h2>count:{{range}}</h2>
+    <h1>{{range}}</h1>
     <input type="range" [(ngModel)]="range" min="0" max="{{rangeMax}}">
     <br>
     <p>
-      <a class="btn btn-primary btn-lg" role="button" routerLink="/products">Buy</a>
+      <a class="btn btn-success btn-lg" role="button" (click)="saveProduct(product)">Buy</a>
       <a class="btn btn-default btn-lg" role="button" routerLink="/products">Cancel</a>
     </p>
-    <p>On warehouse: </p>
+    <p>On warehouse: {{ product.onStore }}</p>
   </div>
 </div>

@@ -3,6 +3,8 @@ import {Store} from "@ngrx/store";
 import {Observable} from "rxjs/Observable";
 import {Product} from "../../models/product";
 import {UserData} from "../../models/userdata";
+import {BUY_PRODUCT} from "../../actions/actions";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-buy',
@@ -19,8 +21,9 @@ export class BuyComponent implements OnInit {
   observableProduct:Observable<Product>;
   observableUserData:Observable<UserData>;
 
-
-  constructor(private store:Store<Product>, private userDataStore:Store<UserData>) {
+  constructor(private store:Store<Product>,
+              private userDataStore:Store<UserData>,
+              private router:Router) {
     this.observableProduct = store.select('selectedProduct');
     this.observableProduct.subscribe(v => {
       if (v)
@@ -30,10 +33,20 @@ export class BuyComponent implements OnInit {
     this.observableUserData = userDataStore.select('game');
     this.observableUserData.subscribe(userData => {
       if (userData) {
-        console.log(userData);
         this.rangeMax = Math.round(userData.cash / this.product.prize);
       }
     });
+  }
+
+  saveProduct(product:Product):void {
+    this.userDataStore.dispatch({
+      type: BUY_PRODUCT,
+      payload: {
+        product: product,
+        range: this.range
+      }
+    });
+    this.router.navigate(['/products']);
   }
 
   ngOnInit() {

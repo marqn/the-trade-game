@@ -1,6 +1,6 @@
 import {UserData} from "../models/userdata";
 import {productFactory, Product} from "../models/product";
-import {BUY_PRODUCT, CHANGE_CITY, NEW_GAME} from "../actions/actions";
+import {BUY_PRODUCT, CHANGE_CITY, NEW_GAME, SELL_PRODUCT} from "../actions/actions";
 import {CITIES} from "../mocks/mocks";
 
 export const game = (state:UserData = initGame(), action) => {
@@ -25,7 +25,18 @@ export const game = (state:UserData = initGame(), action) => {
 
     case BUY_PRODUCT:
     {
-      return Object.assign({}, state, action.payload);
+      if (action.payload) {
+        updateProduct(BUY_PRODUCT, action.payload.product.id, action.payload.range, state);
+        updateCash(BUY_PRODUCT, action.payload.product.prize, action.payload.range, state);
+      }
+      return state;
+    }
+    case SELL_PRODUCT:
+    {
+      if (action.payload) {
+        updateCash(SELL_PRODUCT, action.payload.product.prize, action.payload.range, state);
+        updateProduct(SELL_PRODUCT, action.payload.product.id, action.payload.range, state);
+      }
     }
 
     default:
@@ -57,7 +68,7 @@ export function initGame():UserData {
   userData.cash = 2000;
   userData.debt = 2000;
   userData.currentDay = 1;
-  userData.dayLimit = 3;
+  userData.dayLimit = 10;
 
   userData.currentCity = CITIES[0];
   userData.warehouse = products;
@@ -70,4 +81,23 @@ function changePrizeForAllProducts(products:Array<Product>, min:number = 1, max:
   for (let item of products) {
     item.prize = Math.random() * (max - min) + min;
   }
+}
+
+function updateProduct(action:String, productId:number, range:number, state:UserData):void {
+  for (let i:number = 0; i < state.warehouse.length; i++) {
+    let storeProduct:Product = state.warehouse[i];
+    if (storeProduct.id == productId) {
+      if (action == SELL_PRODUCT)
+        state.warehouse[i].onStore -= range;
+      else if (action == BUY_PRODUCT)
+        state.warehouse[i].onStore += range;
+    }
+  }
+}
+
+function updateCash(action:string, prize:number, range:number, state:UserData) {
+  if (action === SELL_PRODUCT)
+    state.cash += prize * range;
+  else if (action === BUY_PRODUCT)
+    state.cash -= prize * range;
 }

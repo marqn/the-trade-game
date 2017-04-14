@@ -4,6 +4,7 @@ import {Observable} from "rxjs/Observable";
 import {SELECTED_PRODUCT} from "../../../actions/actions";
 import {Store} from "@ngrx/store";
 import {Router} from "@angular/router";
+import {UserData} from "../../../models/userdata";
 
 @Component({
   selector: 'app-product',
@@ -12,13 +13,25 @@ import {Router} from "@angular/router";
 })
 export class ProductComponent implements OnInit {
 
-  @Input() productItem:Observable<Product>;
+  @Input() productItem:Product;
+  productStore:Observable<UserData>;
+  buyBtnDisabled:boolean;
+  sellBtnDisabled:boolean;
+  cash:number;
 
-  constructor(private store:Store<Product>, private router:Router) {
-
+  constructor(private store:Store<UserData>, private router:Router) {
+    this.productStore = store.select('game');
+    this.productStore.subscribe(v => {
+      this.cash = v.cash;
+    });
   }
 
   ngOnInit() {
+    if ((this.cash / this.productItem.prize) < 1)
+      this.buyBtnDisabled = true;
+
+    if (this.productItem.onStore == 0)
+      this.sellBtnDisabled = true;
   }
 
   selectProduct(item:Product, operation:string):void {
@@ -33,5 +46,4 @@ export class ProductComponent implements OnInit {
     else if (operation === 'sell')
       this.router.navigate(['/sell']);
   }
-
 }

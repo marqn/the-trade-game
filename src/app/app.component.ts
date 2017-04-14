@@ -21,7 +21,6 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit() {
-    // this.store.dispatch({type:'BUY_PRODUCT'});
   }
 
 
