@@ -3,6 +3,7 @@ import {Store} from "@ngrx/store";
 import {UserData} from "../../models/userdata";
 import {Observable} from "rxjs/Observable";
 import {Router} from "@angular/router";
+import {FINISH_GAME} from "../../actions/actions";
 
 @Component({
   selector: 'app-infobar',
@@ -20,9 +21,16 @@ export class InfobarComponent implements OnInit {
         this.gamedata = v;
         if (v.isEndGame) {
           this.router.navigate(['/endpage']);
-        } 
+        }
       }
     );
+  }
+
+  finishGame() {
+    this.store.dispatch({
+      type: FINISH_GAME
+    });
+    this.router.navigate(["/endpage"]);
   }
 
 

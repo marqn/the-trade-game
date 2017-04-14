@@ -7,7 +7,8 @@
   <div class="col-md-4">
     <span *ngIf="!gamedata.isEndGame">
       <h2>{{ gamedata.currentCity.name }}</h2>
-      <button class="btn btn-default" routerLink="/city-chooser">Change city</button>
+      <button class="btn btn-default" *ngIf="gamedata.dayLimit > 1" routerLink="/city-chooser">Change city</button>
+      <button class="btn btn-default" *ngIf="gamedata.dayLimit == 1" (click)="finishGame()">Finish</button>
     </span>
     <h2 *ngIf="gamedata.isEndGame">Game Over</h2>
   </div>

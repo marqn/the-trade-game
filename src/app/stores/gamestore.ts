@@ -1,6 +1,6 @@
 import {UserData} from "../models/userdata";
 import {productFactory, Product} from "../models/product";
-import {BUY_PRODUCT, CHANGE_CITY, NEW_GAME, SELL_PRODUCT} from "../actions/actions";
+import {BUY_PRODUCT, CHANGE_CITY, NEW_GAME, SELL_PRODUCT, FINISH_GAME} from "../actions/actions";
 import {CITIES} from "../mocks/mocks";
 
 export const game = (state:UserData = initGame(), action) => {
@@ -15,6 +15,11 @@ export const game = (state:UserData = initGame(), action) => {
       state.currentCity = action.payload;
 
       return Object.assign({}, state, action.payload);
+    }
+
+    case FINISH_GAME: {
+      watchGameProgress(state);
+      return state;
     }
 
     case NEW_GAME:
