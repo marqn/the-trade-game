@@ -14,7 +14,7 @@ import {Router} from "@angular/router";
 export class BuyComponent implements OnInit {
 
   isBuy:boolean = true;
-  
+
   range:number = 0;
   rangeMax:number;
 
@@ -35,7 +35,7 @@ export class BuyComponent implements OnInit {
     this.observableUserData = userDataStore.select('game');
     this.observableUserData.subscribe(userData => {
       if (userData) {
-        this.rangeMax = Math.round(userData.cash / this.product.prize);
+        this.rangeMax = Math.trunc(userData.cash / this.product.prize);
       }
     });
   }
