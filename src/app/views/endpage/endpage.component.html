@@ -1,12 +1,15 @@
 <div class="text-center">
-  <button class="btn btn-primary" (click)="newGame()">New game</button>
+
+  <h2>Details:</h2>
+  <h3>Cash: {{ cash | currency:'USD':1.1-2 }}</h3>
+  <h3>Debt: {{ debt | currency:'USD':1.1-2}}</h3>
+
+  <!--<p>Position: "Very poor"</p>-->
 
   <div class="spacer"></div>
 
-  <h4>Details:</h4>
-  <p>Cash: 4530</p>
-  <p>Debt: 3090</p>
+  <button class="btn btn-primary" (click)="newGame()">New game</button>
 
-  <p>Position: "Very poor"</p>
+  <div class="spacer"></div>
 
 </div>

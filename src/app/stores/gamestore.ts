@@ -68,7 +68,7 @@ export function initGame():UserData {
   userData.cash = 2000;
   userData.debt = 2000;
   userData.currentDay = 1;
-  userData.dayLimit = 10;
+  userData.dayLimit = 5;
 
   userData.currentCity = CITIES[0];
   userData.warehouse = products;

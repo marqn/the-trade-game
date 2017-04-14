@@ -13,9 +13,15 @@ import {Router} from "@angular/router";
 export class EndpageComponent implements OnInit {
 
   endpageStore:Observable<UserData>;
+  cash:number;
+  debt:number;
 
   constructor(private store:Store<UserData>, private router:Router) {
     this.endpageStore = store.select('game');
+    this.endpageStore.subscribe( v => {
+      this.cash = v.cash;
+      this.debt = v.debt;
+    });
   }
 
   ngOnInit() {
