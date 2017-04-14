@@ -19,6 +19,7 @@ export class InfobarComponent implements OnInit {
     this.infoBarStore = this.store.select('game');
     this.infoBarStore.subscribe(v => {
         this.gamedata = v;
+        // console.log(route);
         if (v.isEndGame) {
           this.router.navigate(['/endpage']);
         }
@@ -31,6 +32,13 @@ export class InfobarComponent implements OnInit {
       type: FINISH_GAME
     });
     this.router.navigate(["/endpage"]);
+  }
+
+  hasChangeCityBtn():boolean {
+    if (this.router.url != '/' && this.router.url != '/city-chooser' && this.gamedata.dayLimit > 1)
+      return true;
+    else
+      return false;
   }
 
 
