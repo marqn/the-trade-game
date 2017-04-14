@@ -8,11 +8,13 @@ import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-buy',
-  templateUrl: './buy.component.html',
-  styleUrls: ['./buy.component.css']
+  templateUrl: './buy-sell.component.html',
+  styleUrls: ['./buy-sell.component.css']
 })
 export class BuyComponent implements OnInit {
 
+  isBuy:boolean = true;
+  
   range:number = 0;
   rangeMax:number;
 

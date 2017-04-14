@@ -12,16 +12,16 @@ import {FooterComponent} from "./views/footer/footer.component";
 import {StoreComponent} from "./views/store/store.component";
 import {ProductsComponent} from "./views/productsPage/products.component";
 import {ProductComponent} from "./views/productsPage/product/product.component";
-import {BuyComponent} from "./views/buy/buy.component";
+import {BuyComponent} from "./views/buy-sell/buy.component";
+import {SellProductsComponent} from "./views/buy-sell/sell.component";
 import {EndpageComponent} from "./views/endpage/endpage.component";
 import {game} from "./stores/gamestore";
 import {StoreModule} from "@ngrx/store";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 import {CityService} from "./services/city.service";
-import { StartpageComponent } from './views/startpage/startpage.component';
+import {StartpageComponent} from "./views/startpage/startpage.component";
 import {cityStore} from "./stores/city.store";
 import {selectedProduct} from "./stores/selectedProduct";
-import { SellProductsComponent } from './views/sell-products/sell-products.component';
 
 const appRoutes:Routes = [
   {
@@ -69,7 +69,7 @@ const appRoutes:Routes = [
     FormsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
-    StoreModule.provideStore({ game, cityStore, selectedProduct}),
+    StoreModule.provideStore({game, cityStore, selectedProduct}),
     StoreDevtoolsModule.instrumentOnlyWithExtension({
       maxAge: 10
     })

@@ -8,11 +8,13 @@ import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-sell-products',
-  templateUrl: './sell-products.component.html',
-  styleUrls: ['./sell-products.component.css']
+  templateUrl: './buy-sell.component.html',
+  styleUrls: ['./buy-sell.component.css']
 })
 export class SellProductsComponent {
 
+  isBuy:boolean;
+  
   range:number = 0;
   rangeMax:number;
 
@@ -20,7 +22,6 @@ export class SellProductsComponent {
 
   observableProduct:Observable<Product>;
   observableUserData:Observable<UserData>;
-
 
   constructor(private store:Store<Product>,
               private userDataStore:Store<UserData>,
@@ -32,12 +33,6 @@ export class SellProductsComponent {
         this.rangeMax = v.onStore;
       }
     });
-
-    this.observableUserData = userDataStore.select('game');
-    /*
-     this.observableUserData.subscribe(userData => {
-     });
-     */
   }
 
   sellProduct(product:Product):void {
