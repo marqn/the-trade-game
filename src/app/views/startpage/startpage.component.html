@@ -1,18 +1,21 @@
 <div class="text-center">
+
+  <p>Witamy w grze The Trader.</p>
+  <p>Wybierz długość gry:</p>
+  <div>
+    <button (click)="changeDayLimit(32)" class="btn btn-default">32</button>
+    <button (click)="changeDayLimit(64)" class="btn btn-default">64</button>
+    <button (click)="changeDayLimit(128)" class="btn btn-default">128</button>
+  </div>
+
   <div>
     <h3>Create account</h3>
     <span>
       <button class="btn btn-primary">Facebook</button>
       <button class="btn btn-danger">Google</button>
+      <button class="btn btn-default">Anonymous</button>
     </span>
   </div>
-
-  <!--<div>
-    <p>Difficult:</p>
-    <button type="button" class="btn btn-primary btn-lg btn-block">Easy</button>
-    <button type="button" class="btn btn-default btn-lg btn-block">Middle</button>
-    <button type="button" class="btn btn-default btn-lg btn-block">Hard</button>
-  </div>-->
 
   <div class="spacer"></div>
 

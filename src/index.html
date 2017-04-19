@@ -4,9 +4,23 @@
   <meta charset="utf-8">
   <title>TheTradeGame</title>
   <base href="/">
-
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyB-AnXbaEtQpD3sCfVj2xw8wizMITLqrQA",
+      authDomain: "the-trade-game.firebaseapp.com",
+      databaseURL: "https://the-trade-game.firebaseio.com",
+      projectId: "the-trade-game",
+      storageBucket: "the-trade-game.appspot.com",
+      messagingSenderId: "818375448885"
+    };
+    firebase.initializeApp(config);
+  </script>
+
 </head>
 <body>
   <app-root>Loading...</app-root>

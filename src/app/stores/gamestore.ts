@@ -1,10 +1,23 @@
 import {UserData} from "../models/userdata";
 import {productFactory, Product} from "../models/product";
-import {BUY_PRODUCT, CHANGE_CITY, NEW_GAME, SELL_PRODUCT, FINISH_GAME} from "../actions/actions";
+import {BUY_PRODUCT, CHANGE_CITY, NEW_GAME, SELL_PRODUCT, FINISH_GAME, CHANGE_DAY_LIMIT} from "../actions/actions";
 import {CITIES} from "../mocks/mocks";
 
 export const game = (state:UserData = initGame(), action) => {
   switch (action.type) {
+
+    case NEW_GAME:
+    {
+      state = initGame(state);
+      changePrizeForAllProducts(state.warehouse);
+      return state;
+    }
+
+    case CHANGE_DAY_LIMIT:
+    {
+      state.dayLimit = action.payload;
+      return state;
+    }
 
     case CHANGE_CITY:
     {
@@ -17,15 +30,10 @@ export const game = (state:UserData = initGame(), action) => {
       return Object.assign({}, state, action.payload);
     }
 
-    case FINISH_GAME: {
+    case FINISH_GAME:
+    {
       watchGameProgress(state);
       return state;
-    }
-
-    case NEW_GAME:
-    {
-      state = initGame();
-      changePrizeForAllProducts(state.warehouse);
     }
 
     case BUY_PRODUCT:
@@ -42,6 +50,7 @@ export const game = (state:UserData = initGame(), action) => {
         updateCash(SELL_PRODUCT, action.payload.product.prize, action.payload.range, state);
         updateProduct(SELL_PRODUCT, action.payload.product.id, action.payload.range, state);
       }
+      return state;
     }
 
     default:
@@ -60,9 +69,14 @@ function watchEndGame(state:UserData):void {
   }
 }
 
-export function initGame():UserData {
+export function initGame(state:UserData = null):UserData {
 
-  let userData:UserData = new UserData();
+  let userData:UserData;
+  if (!state)
+    userData = new UserData();
+  else
+    userData = state;
+
   let products:Array<Product> = [
     productFactory(1, 'Tobacco'),
     productFactory(2, 'Coffee'),
@@ -73,7 +87,7 @@ export function initGame():UserData {
   userData.cash = 2000;
   userData.debt = 2000;
   userData.currentDay = 1;
-  userData.dayLimit = 5;
+  // userData.dayLimit = 5;
 
   userData.currentCity = CITIES[0];
   userData.warehouse = products;
