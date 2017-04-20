@@ -19,7 +19,6 @@ export class InfobarComponent implements OnInit {
     this.infoBarStore = this.store.select('game');
     this.infoBarStore.subscribe(v => {
         this.gamedata = v;
-        // console.log(route);
         if (v.isEndGame) {
           this.router.navigate(['/endpage']);
         }

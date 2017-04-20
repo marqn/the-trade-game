@@ -17,4 +17,6 @@ export class UserData {
 
   isEndGame:boolean;
 
+  storeCapacity:number;
+
 }

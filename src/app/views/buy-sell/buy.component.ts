@@ -36,6 +36,10 @@ export class BuyComponent implements OnInit {
     this.observableUserData.subscribe(userData => {
       if (userData) {
         this.rangeMax = Math.trunc(userData.cash / this.product.prize);
+        if(this.rangeMax > userData.storeCapacity)
+        {
+          this.rangeMax = userData.storeCapacity;
+        }
       }
     });
   }

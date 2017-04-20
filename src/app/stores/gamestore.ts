@@ -86,6 +86,7 @@ export function initGame(state:UserData = null):UserData {
 
   userData.cash = 2000;
   userData.debt = 2000;
+  userData.storeCapacity = 100;
   userData.currentDay = 1;
   // userData.dayLimit = 5;
 
@@ -106,10 +107,14 @@ function updateProduct(action:String, productId:number, range:number, state:User
   for (let i:number = 0; i < state.warehouse.length; i++) {
     let storeProduct:Product = state.warehouse[i];
     if (storeProduct.id == productId) {
-      if (action == SELL_PRODUCT)
+      if (action == SELL_PRODUCT) {
         state.warehouse[i].onStore -= range;
-      else if (action == BUY_PRODUCT)
+        state.storeCapacity += range;
+      }
+      else if (action == BUY_PRODUCT) {
         state.warehouse[i].onStore += range;
+        state.storeCapacity -= range;
+      }
     }
   }
 }
@@ -119,4 +124,9 @@ function updateCash(action:string, prize:number, range:number, state:UserData) {
     state.cash += prize * range;
   else if (action === BUY_PRODUCT)
     state.cash -= prize * range;
+}
+
+
+function effortlessEnglishClub():void {
+  
 }

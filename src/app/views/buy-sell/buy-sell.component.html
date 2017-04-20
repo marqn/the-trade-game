@@ -11,15 +11,13 @@
 
         <button type="button" class="btn btn-default" (click)="range = range - 1">
           <span class="glyphicon glyphicon-triangle-left" ></span>
-        </button>
+        </button> {{range}}
 
-        {{range}}
-
-        <button type="button" class="btn btn-default" (click)="range = range + 1" >
+        <button type="button" class="btn btn-default" (click)="range = range + 1">
           <span class="glyphicon glyphicon-triangle-right" ></span>
         </button>
 
-        <button type="button" class="btn btn-default" (click)="range = rangeMax" >
+        <button type="button" class="btn btn-default" (click)="range = rangeMax">
           <span class="glyphicon glyphicon-step-forward" ></span>
         </button>
 

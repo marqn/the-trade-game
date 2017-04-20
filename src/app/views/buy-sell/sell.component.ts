@@ -17,11 +17,8 @@ export class SellProductsComponent {
   
   range:number = 0;
   rangeMax:number;
-
   product:Product = new Product();
-
   observableProduct:Observable<Product>;
-  observableUserData:Observable<UserData>;
 
   constructor(private store:Store<Product>,
               private userDataStore:Store<UserData>,
